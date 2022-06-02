@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Profile("dev")
 @Component
-public class DevTimeScheduler {
+public class DevTimeScheduler implements CommonScheduler {
 
     private static final Logger log = LoggerFactory.getLogger(DevTimeScheduler.class);
 
@@ -19,4 +19,21 @@ public class DevTimeScheduler {
         log.info("Only on DEV profile: {}", LocalDateTime.now());
     }
 
+    @Scheduled(fixedRate = 3500)
+    @Override
+    public void uploadDocuments() {
+        log.info("DEV - Uploading documents");
+    }
+
+    @Scheduled(fixedRate = 4200)
+    @Override
+    public void createReporting() {
+        log.info("DEV - Creating report");
+    }
+
+    @Scheduled(fixedRate = 4800)
+    @Override
+    public void trainDevelopers() {
+        log.info("DEV - Developer training");
+    }
 }

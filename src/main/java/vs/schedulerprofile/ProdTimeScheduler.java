@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Profile("prod")
 @Component
-public class ProdTimeScheduler {
+public class ProdTimeScheduler implements CommonScheduler, ProductionScheduler {
 
     private static final Logger log = LoggerFactory.getLogger(ProdTimeScheduler.class);
 
@@ -19,4 +19,27 @@ public class ProdTimeScheduler {
         log.info("Only on PROD profile: {}", LocalDateTime.now());
     }
 
+    @Scheduled(fixedRate = 3500)
+    @Override
+    public void uploadDocuments() {
+        log.info("PROD - Uploading documents");
+    }
+
+    @Scheduled(fixedRate = 4200)
+    @Override
+    public void createReporting() {
+        log.info("PROD - Creating report");
+    }
+
+    @Scheduled(fixedRate = 4800)
+    @Override
+    public void trainDevelopers() {
+        log.info("PROD - Developer training");
+    }
+
+    @Scheduled(fixedRate = 5000)
+    @Override
+    public void createMonthlyReporting() {
+        log.info("PROD - Creating montly report");
+    }
 }
